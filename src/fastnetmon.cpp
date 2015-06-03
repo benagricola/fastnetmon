@@ -1174,6 +1174,8 @@ void process_packet(simple_packet& current_packet) {
             return;
         }
 
+        logger << log4cpp::Priority::INFO << "OUTGOING - Packets: " << sampled_number_of_packets << " Bytes: " << sampled_number_of_bytes << " Proto: " << get_printable_protocol_name(current_packet.protocol);
+
         map_element* current_element = &itr->second[shift_in_vector];
 
         // Main packet/bytes counter
@@ -1258,6 +1260,7 @@ void process_packet(simple_packet& current_packet) {
         } else {
         }
 
+
     } else if (packet_direction == INCOMING) {
         int64_t shift_in_vector = (int64_t)ntohl(current_packet.dst_ip) - (int64_t)subnet_in_host_byte_order;
 
@@ -1271,6 +1274,8 @@ void process_packet(simple_packet& current_packet) {
 
             return;
         }
+
+        logger << log4cpp::Priority::INFO << "INCOMING - Packets: " << sampled_number_of_packets << " Bytes: " << sampled_number_of_bytes << " Proto: " << get_printable_protocol_name(current_packet.protocol);
 
         map_element* current_element = &itr->second[shift_in_vector];
 
